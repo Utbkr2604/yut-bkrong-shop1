@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Y UT BKRONG — SHOP</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#05050c;
+  color:#fff;
+  font:15px Arial,sans-serif
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1000px;margin:auto;padding:18px}
+
+.top{
+  position:sticky;
+  top:10px;
+  z-index:5;
+  background:#ffffff10;
+  border:1px solid #ffffff20;
+  border-radius:18px;
+  backdrop-filter:blur(15px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+
+.brand{font-weight:800;letter-spacing:2px}
+.nav{display:flex;gap:7px;flex-wrap:wrap}
+
+button{
+  border:1px solid #ffffff20;
+  background:#ffffff0c;
+  color:#fff;
+  padding:10px 13px;
+  border-radius:11px;
+  cursor:pointer
+}
+
+button.primary{
+  background:#7c3aed;
+  border:0
+}
+
+.hero{text-align:center;padding:70px 10px 40px}
+
+.logo{
+  margin:auto;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:65px;
+  font-weight:900;
+  background:#15102a;
+  border:4px solid #8b5cf6;
+  box-shadow:0 0 55px #8b5cf655
+}
+
+.hero h1{
+  font-size:clamp(32px,7vw,62px);
+  margin:25px 0 10px;
+  background:linear-gradient(90deg,#fff,#a78bfa,#67e8f9,#fff);
+  color:transparent;
+  background-clip:text
+}
+
+.muted{
+  color:#9ca3af;
+  line-height:1.6;
+  font-size:13px
+}
+
+.card{
+  margin:16px 0;
+  padding:20px;
+  border:1px solid #ffffff18;
+  border-radius:20px;
+  background:#ffffff08;
+  backdrop-filter:blur(15px)
+}
+
+.title{
+  font-weight:800;
+  letter-spacing:2px;
+  color:#c4b5fd;
+  margin-bottom:15px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px
+}
+
+.product,.stat{
+  padding:18px;
+  border:1px solid #ffffff14;
+  border-radius:16px;
+  background:#0003
+}
+
+.price,.balance{
+  font-size:21px;
+  font-weight:800;
+  color:#67e8f9;
+  margin:8px 0
+}
+
+.balance{font-size:28px}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000b;
+  z-index:20;
+  place-items:center;
+  padding:18px
+}
+
+.modal.show{display:grid}
+
+.box{
+  width:min(550px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0d0d17;
+  border:1px solid #ffffff20;
+  border-radius:20px;
+  padding:20px
+}
+
+.input{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  background:#0006;
+  color:#fff;
+  border:1px solid #ffffff20;
+  border-radius:10px
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+
+.hide{display:none!important}
+
+.qr{
+  display:block;
+  width:230px;
+  height:230px;
+  margin:12px auto;
+  background:#fff;
+  padding:7px;
+  border-radius:10px
+}
+
+.code{
+  font-weight:900;
+  color:#67e8f9;
+  word-break:break-all;
+  font-size:18px
+}
+
+.notice{
+  padding:12px;
+  border-radius:12px;
+  background:#f59e0b12;
+  border:1px solid #f59e0b44;
+  color:#fcd34d;
+  font-size:12px;
+  line-height:1.6
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px
+}
+
+.table th,.table td{
+  padding:9px;
+  border-bottom:1px solid #ffffff12;
+  text-align:left
+}
+
+.admin{display:none}
+.admin.show{display:block}
+
+.footer{
+  text-align:center;
+  color:#667085;
+  padding:35px 0;
+  font-size:11px
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap top">
+  <div class="brand">Y UT BKRONG // SHOP</div>
+
+  <div class="nav">
+    <button onclick="shop.scrollIntoView({behavior:'smooth'})">
+      SHOP
+    </button>
+
+    <button onclick="wallet.scrollIntoView({behavior:'smooth'})">
+      VÍ
+    </button>
+
+    <button onclick="openAuth()">
+      ĐĂNG NHẬP
+    </button>
+
+    <button class="primary" onclick="openAdmin()">
+      ADMIN
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <div class="logo">U</div>
+  <h1>Y UT BKRONG</h1>
+  <p class="muted">
+    SHOP · VÍ TIỀN · GIAO DỊCH · QR
+  </p>
+</section>
+
+<section class="card">
+
+  <div class="title">
+    TÀI KHOẢN
+  </div>
+
+  <div id="guest">
+
+    <button class="primary" onclick="openAuth()">
+      Đăng ký / Đăng nhập
+    </button>
+
+    <p class="muted">
+      Cần tài khoản để nạp tiền và mua hàng.
+    </p>
+
+  </div>
+
+  <div id="logged" class="hide row">
+
+    <div>
+      <b id="uname"></b>
+      <div id="uemail" class="muted"></div>
+    </div>
+
+    <button onclick="logout()">
+      Đăng xuất
+    </button>
+
+  </div>
+
+</section>
+
+
+<section id="shop" class="card">
+
+  <div class="title">
+    ✦ SHOP
+  </div>
+
+  <div id="products" class="grid"></div>
+
+</section>
+
+
+<section id="wallet" class="card">
+
+  <div class="title">
+    ◈ VÍ TIỀN
+  </div>
+
+  <div class="grid">
+
+    <div class="stat">
+      <div class="muted">Số dư</div>
+      <div id="balance" class="balance">
+        0đ
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="muted">Nạp tối thiểu</div>
+      <div class="balance">
+        10.000đ
+      </div>
+    </div>
+
+  </div>
+
+  <p>
+
+    <button class="primary" onclick="startTopup()">
+      ＋ Nạp tiền
+    </button>
+
+    <button onclick="showHistory()">
+      Lịch sử
+    </button>
+
+  </p>
+
+  <div id="history"></div>
+
+</section>
+
+
+<section class="card">
+
+  <div class="title">
+    THÔNG TIN NHẬN TIỀN
+  </div>
+
+  <div class="notice">
+    Mỗi lần nạp tạo mã giao dịch riêng.
+    Sau khi chuyển khoản, Admin kiểm tra và xác nhận
+    thì số dư mới được cộng.
+  </div>
+
+  <div class="grid" style="margin-top:14px">
+
+    <div>
+      Ngân hàng<br>
+      <b id="bankText">TECHCOMBANK</b>
+    </div>
+
+    <div>
+      Chủ tài khoản<br>
+      <b id="ownerText">Y UT BKRONG</b>
+    </div>
+
+    <div>
+      Số tài khoản<br>
+      <b id="numberText">2126042009</b>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="adminPanel" class="card admin">
+
+  <div class="row">
+
+    <div class="title">
+      ⚙ ADMIN DASHBOARD
+    </div>
+
+    <button onclick="closeAdmin()">
+      Đóng
+    </button>
+
+  </div>
+
+  <div class="notice">
+    Đây là bản demo front-end dùng localStorage.
+    Không nên dùng cơ chế này để xử lý tiền thật;
+    triển khai thực tế cần backend/database và xác thực an toàn.
+  </div>
+
+  <div class="grid" style="margin-top:14px">
+
+    <div class="stat">
+      Khách<br>
+      <b id="userCount">0</b>
+    </div>
+
+    <div class="stat">
+      Giao dịch<br>
+      <b id="txCount">0</b>
+    </div>
+
+    <div class="stat">
+      Chờ duyệt<br>
+      <b id="pendingCount">0</b>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="title">
+      THÊM SẢN PHẨM
+    </div>
+
+    <input
+      id="newName"
+      class="input"
+      placeholder="Tên sản phẩm"
+    >
+
+    <input
+      id="newPrice"
+      class="input"
+      type="number"
+      placeholder="Giá VNĐ"
+    >
+
+    <input
+      id="newDesc"
+      class="input"
+      placeholder="Mô tả"
+    >
+
+    <button class="primary" onclick="addProduct()">
+      ＋ Thêm
+    </button>
+
+    <div id="adminProducts"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="title">
+      THÔNG TIN NGÂN HÀNG
+    </div>
+
+    <input
+      id="bankInput"
+      class="input"
+      placeholder="Ngân hàng"
+    >
+
+    <input
+      id="ownerInput"
+      class="input"
+      placeholder="Chủ tài khoản"
+    >
+
+    <input
+      id="numberInput"
+      class="input"
+      placeholder="Số tài khoản"
+    >
+
+    <input
+      id="qrInput"
+      class="input"
+      placeholder="URL QR riêng, để trống dùng VietQR"
+    >
+
+    <button class="primary" onclick="saveBank()">
+      Lưu
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="title">
+      GIAO DỊCH
+    </div>
+
+    <div id="adminTx"></div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<div id="auth" class="modal">
+
+  <div class="box">
+
+    <div class="row">
+
+      <div class="title">
+        TÀI KHOẢN
+      </div>
+
+      <button onclick="closeModal('auth')">
+        ✕
+      </button>
+
+    </div>
+
+
+    <div id="loginBox">
+
+      <input
+        id="loginEmail"
+        class="input"
+        placeholder="Email"
+      >
+
+      <input
+        id="loginPass"
+        class="input"
+        type="password"
+        placeholder="Mật khẩu"
+      >
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="login()"
+      >
+        Đăng nhập
+      </button>
+
+      <p>
+        <button
+          style="width:100%"
+          onclick="toggleAuth()"
+        >
+          Tạo tài khoản
+        </button>
+      </p>
+
+    </div>
+
+
+    <div id="registerBox" class="hide">
+
+      <input
+        id="regName"
+        class="input"
+        placeholder="Tên hiển thị"
+      >
+
+      <input
+        id="regEmail"
+        class="input"
+        placeholder="Email"
+      >
+
+      <input
+        id="regPass"
+        class="input"
+        type="password"
+        placeholder="Mật khẩu (6+ ký tự)"
+      >
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="register()"
+      >
+        Đăng ký
+      </button>
+
+      <p>
+        <button
+          style="width:100%"
+          onclick="toggleAuth()"
+        >
+          Đã có tài khoản
+        </button>
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="topup" class="modal">
+
+  <div class="box">
+
+    <div class="row">
+
+      <div class="title">
+        NẠP TIỀN
+      </div>
+
+      <button onclick="closeModal('topup')">
+        ✕
+      </button>
+
+    </div>
+
+
+    <div id="topupForm">
+
+      <input
+        id="amount"
+        class="input"
+        type="number"
+        min="10000"
+        placeholder="Số tiền tối thiểu 10.000đ"
+      >
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="createTx()"
+      >
+        Tạo giao dịch
+      </button>
+
+    </div>
+
+
+    <div id="payment" class="hide">
+
+      <img id="qr" class="qr">
+
+      <div class="grid">
+
+        <div>
+          Ngân hàng<br>
+          <b id="payBank"></b>
+        </div>
+
+        <div>
+          STK<br>
+          <b id="payNumber"></b>
+        </div>
+
+        <div>
+          Chủ TK<br>
+          <b id="payOwner"></b>
+        </div>
+
+        <div>
+          Số tiền<br>
+          <b id="payAmount"></b>
+        </div>
+
+      </div>
+
+      <p class="muted">
+        Nội dung chuyển khoản:
+      </p>
+
+      <div id="payCode" class="code"></div>
+
+      <p class="notice">
+        Chuyển đúng số tiền và nội dung,
+        sau đó bấm “Đã thanh toán”.
+        Admin kiểm tra giao dịch trước khi cộng tiền.
+      </p>
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="confirmPaid()"
+      >
+        ✓ Đã thanh toán
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="adminLogin" class="modal">
+
+  <div class="box">
+
+    <div class="row">
+
+      <div class="title">
+        ADMIN LOGIN
+      </div>
+
+      <button onclick="closeModal('adminLogin')">
+        ✕
+      </button>
+
+    </div>
+
+    <div class="notice">
+      Demo: tài khoản <b>admin</b> /
+      mật khẩu <b>BKRONG-ADMIN-2026</b>.
+      Hãy đổi sang hệ thống xác thực backend
+      khi triển khai thật.
+    </div>
+
+    <input
+      id="adminUser"
+      class="input"
+      placeholder="Tài khoản"
+    >
+
+    <input
+      id="adminPass"
+      class="input"
+      type="password"
+      placeholder="Mật khẩu"
+    >
+
+    <button
+      class="primary"
+      style="width:100%"
+      onclick="adminLogin()"
+    >
+      Đăng nhập Admin
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer class="footer">
+  CRAFTED WITH ✦ · Y UT BKRONG ·
+  <span id="year"></span>
+</footer>
+
+
+<script>
+
+const AU="admin";
+const AP="BKRONG-ADMIN-2026";
+
+const $=id=>document.getElementById(id);
+
+const read=(k,d)=>{
+  try{
+    return JSON.parse(localStorage.getItem(k))??d
+  }catch(e){
+    return d
+  }
+};
+
+const write=(k,v)=>
+  localStorage.setItem(k,JSON.stringify(v));
+
+const money=n=>
+  new Intl.NumberFormat("vi-VN").format(n)+"đ";
+
+const uid=p=>
+  p+Date.now().toString(36)+
+  Math.random().toString(36).slice(2,7);
+
+const esc=s=>
+  String(s??"").replace(
+    /[&<>"']/g,
+    m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
+
+if(!localStorage.getItem("products"))
+write("products",[
+  {
+    id:"p1",
+    name:"MENU FF",
+    price:50000,
+    desc:"Sản phẩm mẫu"
+  },
+  {
+    id:"p2",
+    name:"AIM",
+    price:30000,
+    desc:"Sản phẩm mẫu"
+  },
+  {
+    id:"p3",
+    name:"ĐỊNH VỊ",
+    price:40000,
+    desc:"Sản phẩm mẫu"
+  }
+]);
+
+
+if(!localStorage.getItem("users"))
+write("users",[]);
+
+if(!localStorage.getItem("tx"))
+write("tx",[]);
+
+if(!localStorage.getItem("bank"))
+write("bank",{
+  bank:"TECHCOMBANK",
+  owner:"Y UT BKRONG",
+  number:"2126042009",
+  qr:""
+});
+
+
+let current=localStorage.getItem("currentUser");
+
+
+function user(){
+  return read("users",[]).find(x=>x.id===current)
+}
+
+
+function openAuth(){
+  $("auth").classList.add("show")
+}
+
+
+function closeModal(x){
+  $(x).classList.remove("show")
+}
+
+
+function toggleAuth(){
+  $("loginBox").classList.toggle("hide");
+  $("registerBox").classList.toggle("hide")
+}
+
+
+function register(){
+
+  let n=$("regName").value.trim();
+  let e=$("regEmail").value.trim().toLowerCase();
+  let p=$("regPass").value;
+
+  if(!n||!e||p.length<6)
+    return alert(
+      "Nhập đủ thông tin, mật khẩu ít nhất 6 ký tự."
+    );
+
+  let a=read("users",[]);
+
+  if(a.some(x=>x.email===e))
+    return alert("Email đã tồn tại.");
+
+  let x={
+    id:uid("U_"),
+    name:n,
+    email:e,
+    pass:p,
+    balance:0
+  };
+
+  a.push(x);
+
+  write("users",a);
+
+  current=x.id;
+
+  localStorage.setItem(
+    "currentUser",
+    current
+  );
+
+  closeModal("auth");
+
+  render()
+}
+
+
+function login(){
+
+  let e=$("loginEmail").value.trim().toLowerCase();
+  let p=$("loginPass").value;
+
+  let x=read("users",[])
+    .find(a=>a.email===e&&a.pass===p);
+
+  if(!x)
+    return alert("Sai email hoặc mật khẩu.");
+
+  current=x.id;
+
+  localStorage.setItem(
+    "currentUser",
+    current
+  );
+
+  closeModal("auth");
+
+  render()
+}
+
+
+function logout(){
+
+  current=null;
+
+  localStorage.removeItem(
+    "currentUser"
+  );
+
+  render()
+}
+
+
+function render(){
+
+  let x=user();
+
+  $("guest").classList.toggle(
+    "hide",
+    !!x
+  );
+
+  $("logged").classList.toggle(
+    "hide",
+    !x
+  );
+
+  if(x){
+
+    $("uname").textContent=x.name;
+    $("uemail").textContent=x.email;
+    $("balance").textContent=money(x.balance)
+
+  }else{
+
+    $("balance").textContent="0đ"
+
+  }
+
+  renderProducts();
+  loadBank()
+}
+
+
+function renderProducts(){
+
+  $("products").innerHTML=
+    read("products",[])
+    .map(p=>`
+
+      <div class="product">
+
+        <h3>${esc(p.name)}</h3>
+
+        <div class="price">
+          ${money(p.price)}
+        </div>
+
+        <div class="muted">
+          ${esc(p.desc)}
+        </div>
+
+        <br>
+
+        <button
+          class="primary"
+          onclick="buy('${p.id}')"
+        >
+          Mua bằng ví
+        </button>
+
+      </div>
+
+    `).join("")
+}
+
+
+function buy(id){
+
+  let x=user();
+
+  if(!x)
+    return openAuth();
+
+  let p=read("products",[])
+    .find(a=>a.id===id);
+
+  if(x.balance<p.price)
+    return alert(
+      "Số dư không đủ. Hãy nạp tiền trước."
+    );
+
+  if(!confirm(
+    "Mua "+p.name+
+    " với "+money(p.price)+"?"
+  ))
+    return;
+
+  let u=read("users",[]);
+
+  let me=u.find(
+    a=>a.id===x.id
+  );
+
+  me.balance-=p.price;
+
+  write("users",u);
+
+  let tx=read("tx",[]);
+
+  tx.push({
+    id:uid("BUY_"),
+    userId:x.id,
+    type:"purchase",
+    amount:p.price,
+    status:"completed",
+    time:new Date().toISOString()
+  });
+
+  write("tx",tx);
+
+  render();
+
+  alert("Mua hàng thành công.")
+}
+
+
+function startTopup(){
+
+  if(!user())
+    return openAuth();
+
+  $("topup").classList.add("show");
+
+  $("topupForm")
+    .classList.remove("hide");
+
+  $("payment")
+    .classList.add("hide");
+
+  $("amount").value=""
+}
+
+
+function createTx(){
+
+  let a=Number(
+    $("amount").value
+  );
+
+  if(a<10000)
+    return alert(
+      "Nạp tối thiểu 10.000đ."
+    );
+
+  let s=read("bank",{});
+
+  let code=
+    "NAP-"+
+    Date.now()
+      .toString(36)
+      .toUpperCase();
+
+  let tx=read("tx",[]);
+
+  tx.push({
+    id:uid("TX_"),
+    userId:user().id,
+    type:"topup",
+    amount:a,
+    status:"pending",
+    code,
+    time:new Date().toISOString()
+  });
+
+  write("tx",tx);
+
+  $("payBank").textContent=s.bank;
+  $("payNumber").textContent=s.number;
+  $("payOwner").textContent=s.owner;
+  $("payAmount").textContent=money(a);
+  $("payCode").textContent=code;
+
+  $("qr").src=
+    s.qr ||
+    `https://img.vietqr.io/image/970407-${
+      encodeURIComponent(s.number)
+    }-compact2.png?amount=${a}&addInfo=${
+      encodeURIComponent(code)
+    }&accountName=${
+      encodeURIComponent(s.owner)
+    }`;
+
+  $("topupForm")
+    .classList.add("hide");
+
+  $("payment")
+    .classList.remove("hide")
+}
+
+
+function confirmPaid(){
+
+  alert(
+    "Đã gửi yêu cầu xác nhận. Admin sẽ kiểm tra giao dịch."
+  );
+
+  closeModal("topup");
+
+  showHistory()
+}
+
+
+function showHistory(){
+
+  let x=user();
+
+  if(!x)
+    return openAuth();
+
+  let a=read("tx",[])
+    .filter(t=>t.userId===x.id)
+    .reverse();
+
+  $("history").innerHTML=
+    a.length
+    ?
+    `<table class="table">
+
+      <tr>
+        <th>Mã</th>
+        <th>Loại</th>
+        <th>Tiền</th>
+        <th>Trạng thái</th>
+      </tr>
+
+      ${
+        a.map(t=>`
+
+          <tr>
+
+            <td>
+              ${esc(t.code||t.id)}
+            </td>
+
+            <td>
+              ${
+                t.type==="topup"
+                ?"Nạp"
+                :"Mua"
+              }
+            </td>
+
+            <td>
+              ${money(t.amount)}
+            </td>
+
+            <td>
+              ${esc(t.status)}
+            </td>
+
+          </tr>
+
+        `).join("")
+      }
+
+    </table>`
+
+    :
+
+    "<p class='muted'>Chưa có giao dịch.</p>"
+}
+
+
+function openAdmin(){
+  $("adminLogin").classList.add("show")
+}
+
+
+function closeAdmin(){
+  $("adminPanel")
+    .classList.remove("show")
+}
+
+
+function adminLogin(){
+
+  if(
+    $("adminUser").value!==AU ||
+    $("adminPass").value!==AP
+  )
+    return alert(
+      "Sai thông tin Admin."
+    );
+
+  closeModal("adminLogin");
+
+  $("adminPanel")
+    .classList.add("show");
+
+  renderAdmin();
+
+  $("adminPanel")
+    .scrollIntoView({
+      behavior:"smooth"
+    })
+}
+
+
+function renderAdmin(){
+
+  let u=read("users",[]);
+  let t=read("tx",[]);
+
+  $("userCount").textContent=u.length;
+  $("txCount").textContent=t.length;
+
+  $("pendingCount").textContent=
+    t.filter(
+      x=>x.status==="pending"
+    ).length;
+
+
+  $("adminProducts").innerHTML=
+    read("products",[])
+    .map(p=>`
+
+      <div
+        class="row"
+        style="
+          padding:10px 0;
+          border-bottom:1px solid #ffffff12
+        "
+      >
+
+        <span>
+          ${esc(p.name)}
+          —
+          ${money(p.price)}
+        </span>
+
+        <button
+          onclick="deleteProduct('${p.id}')"
+        >
+          Xóa
+        </button>
+
+      </div>
+
+    `).join("");
+
+
+  $("adminTx").innerHTML=
+
+    t.length
+
+    ?
+
+    `<table class="table">
+
+      <tr>
+        <th>Mã</th>
+        <th>Khách</th>
+        <th>Tiền</th>
+        <th>TT</th>
+        <th></th>
+      </tr>
+
+      ${
+        t.slice()
+        .reverse()
+        .map(x=>{
+
+          let c=u.find(
+            a=>a.id===x.userId
+          );
+
+          return `
+
+            <tr>
+
+              <td>
+                ${esc(x.code||x.id)}
+              </td>
+
+              <td>
+                ${esc(c?.email||"")}
+              </td>
+
+              <td>
+                ${money(x.amount)}
+              </td>
+
+              <td>
+                ${esc(x.status)}
+              </td>
+
+              <td>
+
+                ${
+                  x.type==="topup" &&
+                  x.status==="pending"
+
+                  ?
+
+                  `
+                  <button
+                    class="primary"
+                    onclick="approve('${x.id}')"
+                  >
+                    Duyệt
+                  </button>
+
+                  <button
+                    onclick="reject('${x.id}')"
+                  >
+                    Từ chối
+                  </button>
+                  `
+
+                  :
+
+                  "—"
+                }
+
+              </td>
+
+            </tr>
+
+          `
+
+        }).join("")
+      }
+
+    </table>`
+
+    :
+
+    "<p class='muted'>Chưa có giao dịch.</p>"
+}
+
+
+function addProduct(){
+
+  let n=$("newName")
+    .value.trim();
+
+  let p=Number(
+    $("newPrice").value
+  );
+
+  let d=$("newDesc")
+    .value.trim();
+
+  if(!n||p<=0)
+    return alert(
+      "Nhập tên và giá."
+    );
+
+  let a=read("products",[]);
+
+  a.push({
+    id:uid("P_"),
+    name:n,
+    price:p,
+    desc:d
+  });
+
+  write("products",a);
+
+  $("newName").value="";
+  $("newPrice").value="";
+  $("newDesc").value="";
+
+  render();
+  renderAdmin()
+}
+
+
+function deleteProduct(id){
+
+  if(confirm("Xóa sản phẩm?")){
+
+    write(
+      "products",
+      read("products",[])
+      .filter(
+        p=>p.id!==id
+      )
+    );
+
+    render();
+    renderAdmin()
+
+  }
+}
+
+
+function approve(id){
+
+  let t=read("tx",[]);
+
+  let x=t.find(
+    a=>a.id===id
+  );
+
+  if(
+    !x ||
+    !confirm(
+      "Xác nhận đã nhận được tiền?"
+    )
+  )
+    return;
+
+  let u=read("users",[]);
+
+  let c=u.find(
+    a=>a.id===x.userId
+  );
+
+  if(!c)
+    return;
+
+  c.balance+=x.amount;
+
+  x.status="approved";
+
+  write("users",u);
+  write("tx",t);
+
+  render();
+  renderAdmin()
+}
+
+
+function reject(id){
+
+  let t=read("tx",[]);
+
+  let x=t.find(
+    a=>a.id===id
+  );
+
+  if(x){
+
+    x.status="rejected";
+
+    write("tx",t);
+
+    renderAdmin()
+
+  }
+}
+
+
+function loadBank(){
+
+  let s=read("bank",{});
+
+  $("bankText").textContent=s.bank;
+  $("ownerText").textContent=s.owner;
+  $("numberText").textContent=s.number;
+
+  $("bankInput").value=s.bank;
+  $("ownerInput").value=s.owner;
+  $("numberInput").value=s.number;
+  $("qrInput").value=s.qr||""
+}
+
+
+function saveBank(){
+
+  write("bank",{
+
+    bank:
+      $("bankInput").value ||
+      "TECHCOMBANK",
+
+    owner:
+      $("ownerInput").value ||
+      "Y UT BKRONG",
+
+    number:
+      $("numberInput").value ||
+      "2126042009",
+
+    qr:
+      $("qrInput").value.trim()
+
+  });
+
+  loadBank();
+
+  alert(
+    "Đã lưu thông tin ngân hàng."
+  )
+}
+
+
+$("year").textContent=
+  new Date().getFullYear();
+
+render();
+
+</script>
+
+</body>
+</html>
